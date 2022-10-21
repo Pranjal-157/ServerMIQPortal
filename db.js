@@ -4,12 +4,9 @@ dotenv.config();
 
 
 module.exports = () => {
-  const connectParams = {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  };
+ 
   try{
-    mongoose.connect(process.env.DB, connectParams)
+    mongoose.connect(process.env.DB || test)
     console.log('Connected to database successfully')
   } catch(error){
     console.log(error);

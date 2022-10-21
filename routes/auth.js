@@ -3,7 +3,7 @@ const { User } = require("../models/user");
 const Joi = require("joi");
 const bcrypt = require("bcrypt");
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({ path: '/custom/path/to/.env' });
 
 router.post("/", async (req, res) => {
   try {

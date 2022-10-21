@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-dotenv.config({path:'./config/config.env'});
+dotenv.config();
 
 
 module.exports = () => {
@@ -9,7 +9,7 @@ module.exports = () => {
     useUnifiedTopology: true,
   };
   try{
-    mongoose.connect(process.env.DB, connectParams)
+    mongoose.connect(process.env.DATABASE_URL, connectParams)
     console.log('Connected to database successfully')
   } catch(error){
     console.log(error);

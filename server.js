@@ -10,7 +10,7 @@ const authRoutes = require('./routes/auth');
 const { options } = require('joi');
 
 
-dotenv.config({path:'./config/config.env'});
+dotenv.config();
 
 //database connection 
 connection();

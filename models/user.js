@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken');
 const Joi = require('joi');
 const passwordComplexity = require('joi-password-complexity');
 const dotenv = require("dotenv");
-dotenv.config({path:'./config/config.env'});
+dotenv.config();
 
 
 const Schema = mongoose.Schema;

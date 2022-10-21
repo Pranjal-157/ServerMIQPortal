@@ -9,7 +9,7 @@ const userRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
 
 
-dotenv.config({path:__dirname+'/.env'});
+dotenv.config();
 
 //database connection 
 connection();

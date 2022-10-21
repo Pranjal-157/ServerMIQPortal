@@ -6,7 +6,7 @@ dotenv.config();
 module.exports = () => {
  
   try{
-    mongoose.connect(process.env.DB || test)
+    mongoose.connect(process.env.DB)
     console.log('Connected to database successfully')
   } catch(error){
     console.log(error);

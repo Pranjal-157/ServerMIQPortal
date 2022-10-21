@@ -1,20 +1,29 @@
 const express = require('express');
-const bodyParser = require('body-parser');
+require("dotenv").config();
+const app = express();
+const connection = require('./db');
 const cors = require('cors');
+const details = require('./routes/details')
+const userRoutes = require('./routes/users');
+const authRoutes = require('./routes/auth');
+
+
+//database connection 
+connection();
+
+
+//middlewares
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }))
+
+//routes
+app.use("/details", details)
+app.use("/api/users", userRoutes);
+app.use("/api/auth", authRoutes);
+
 
 const port = process.env.PORT || 8000;
-
-const app = express();
-const details = require('./routes/details')
-app.use(cors());
-app.use(bodyParser.json());
-
-app.use('/details', details);
-app.get('/', (req,res) => {
-   res.send('Hello from server')
-});
-
-
 app.listen(port, () => {
     console.log(`The Port is running on localhost: ${port}`)
 })

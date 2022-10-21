@@ -2,7 +2,7 @@ const router = require("express").Router();
 const {User, validate} = require('../models/user');
 const bcrypt = require('bcrypt');
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({path:'./config/config.env'});
 
 
 

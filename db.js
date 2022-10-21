@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
-dotenv.config();
+dotenv.config({path:'./config/config.env'});
 
 
 module.exports = () => {

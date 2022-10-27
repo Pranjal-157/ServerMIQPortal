@@ -7,7 +7,7 @@ const cors = require('cors');
 const details = require('./routes/details')
 const userRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
-const { options } = require('joi');
+
 
 
 dotenv.config();

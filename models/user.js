@@ -14,7 +14,6 @@ const userSchema = new Schema({
     userName: {type: String, required: true, maxlength: 32, trim: true},
     email: {type: String, required: true, unique: true, trim: true},
     password: {type: String, required: true},
-    confirmPassword: {type: String, required: true},
     salt: String,
     hash: String,
 }, {timestamps: true})
@@ -36,8 +35,7 @@ const validate = (data) => {
         lastName : Joi.string().required().label('last Name'),
         userName : Joi.string().required().label('User Name'),
         email : Joi.string().required().label('Email'),
-        password : passwordComplexity().required().label('Password'),
-        confirmPassword : passwordComplexity().required().label('Confirm Password'),
+        password : passwordComplexity().required().label('Password')
     });
     return schema.validate(data)
 };

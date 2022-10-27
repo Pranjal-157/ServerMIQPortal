@@ -22,11 +22,12 @@ router.post('/', async (req,res) => {
 
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         const hashPassword = await bcrypt.hash(req.body.password, salt);
-        const hashConfirmPassword = await bcrypt.hash(req.body.confirmPassword, salt);
 
-        user = await new User({...req.body, password: hashPassword, confirmPassword: hashConfirmPassword})
+        user = await new User({...req.body, password: hashPassword})
         user.save((error, registerUser) => {
-            res.status(200).send(registerUser)
+
+            const token = registerUser.generateAuthToken();
+            res.status(200).send({ data: token, message: "Registered Successfully" })
         })    
     
     } catch(error){

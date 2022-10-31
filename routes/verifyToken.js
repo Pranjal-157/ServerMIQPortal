@@ -7,7 +7,7 @@ dotenv.config();
 router.use(app.json());
 
 router.use((req,res,next) => {
-  let token = req.headers['x-access-token'];
+  let token = req.headers['token'];
   console.log(token);
 
   if(token){

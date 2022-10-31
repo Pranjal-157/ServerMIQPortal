@@ -28,13 +28,7 @@ app.use("/api/users", userRoutes);
 app.use("/api/auth", authRoutes);
 /* To Check the UserName is available*/
 app.use("/", authRoutes);
-/* To fetch the all the data*/
-app.use("/details", details);
-/* To Create the data*/
-app.use("/details", details);
-/* To Updata the data*/
-app.use("/details", details)
-/* To Delete the data*/
+/* To Fetch,Post,Put,Delete*/
 app.use("/details", details);
 
 

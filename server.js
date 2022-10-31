@@ -4,7 +4,7 @@ const app = express();
 const connection = require('./db');
 const dotenv = require("dotenv");
 const cors = require('cors');
-const details = require('./routes/details')
+const details = require('./routes/details');
 const userRoutes = require('./routes/users');
 const authRoutes = require('./routes/auth');
 
@@ -22,9 +22,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }))
 
 //routes
-app.use("/details", details)
+/* To Register the User*/
 app.use("/api/users", userRoutes);
+/* To Login the User*/
 app.use("/api/auth", authRoutes);
+/* To Check the UserName is available*/
+app.use("/", authRoutes);
+/* To fetch the all the data*/
+app.use("/details", details);
+/* To Create the data*/
+app.use("/details", details);
+/* To Updata the data*/
+app.use("/details", details)
+/* To Delete the data*/
+app.use("/details", details);
 
 
 const port = process.env.PORT || 8000;

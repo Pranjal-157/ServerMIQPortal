@@ -23,7 +23,7 @@ userSchema.methods.generateAuthToken = function(){
         username: this.userName,
         fullName: `${this.firstName} ${this.lastName}`
     };
-    const token = jwt.sign(user, process.env.JWTPRIVATEKEY, {expiresIn:"14d"})
+    const token = jwt.sign(user,  process.env.JWTPRIVATEKEY, {expiresIn:"14d"})
     return token;
 }
 

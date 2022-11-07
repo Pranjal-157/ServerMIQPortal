@@ -7,11 +7,13 @@ dotenv.config();
 router.use(app.json());
 
 router.use((req,res,next) => {
-  let token = req.headers['token'];
+  let token = req.headers['authorization'];
   console.log(token);
+  const tokenValue = token.split(' ')[1]
+  console.log(tokenValue);
 
-  if(token){
-    jwt.verify(token, process.env.JWTPRIVATEKEY, (err,decoded) => {
+  if(tokenValue){
+    jwt.verify(tokenValue, process.env.JWTPRIVATEKEY, (err,decoded) => {
       if(err){
         let errorData = {
           message: err.message,

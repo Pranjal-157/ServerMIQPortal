@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const dataSchema = new Schema({
   title: { type: String, required: true, maxlength: 70, trim: true },
-  description: { type: String | null, trim: true },
+  description: { type: String | null },
   technology: { type: String, required: true, maxlength: 15, trim: true },
   experience: { type: String, required: true, trim: true },
   code: { type: String, trim: true },

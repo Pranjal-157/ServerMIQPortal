@@ -21,7 +21,7 @@ const Data = mongoose.model("Data", dataSchema);
 const validateData = (data) => {
   const schema = Joi.object({
     title: Joi.string().required().label("Title"),
-    description: Joi.string().required().label("Description"),
+    description: Joi.string().label("Description"),
     technology: Joi.string().required().label("Technology"),
     experience: Joi.string().required().label("Experience Level"),
     code: Joi.string().allow(null).label("Code No"),

@@ -27,6 +27,7 @@ router.post("/", verifyToken, async (req, res) => {
     }
 
     let details = await new Data(req.body);
+    console.log(details.creationDate);
     details.save((err, addData) => {
       res.status(200).send({ data: addData });
     });

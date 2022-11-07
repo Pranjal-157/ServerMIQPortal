@@ -13,7 +13,7 @@ const dataSchema = new Schema({
   code: { type: String, trim: true },
   client: { type: String, required: true, maxlength: 10, trim: true },
   postedBy: { type: String, required: true, maxlength: 30, trim: true },
-  creationDate: {type: String, default: new Date().getTime().toString()}
+  creationDate: {type: String, required: true, trim: true}
 });
 
 const Data = mongoose.model("Data", dataSchema);
@@ -26,7 +26,8 @@ const validateData = (data) => {
     experience: Joi.string().required().label("Experience Level"),
     code: Joi.optional().allow(null).label("Code No"),
     client: Joi.string().required().label("Client Name"),
-    postedBy: Joi.string().required().label("Posted By")
+    postedBy: Joi.string().required().label("Posted By"),
+    creationDate: Joi.string().required().label("Creation Date")
   });
   return schema.validate(data);
 };

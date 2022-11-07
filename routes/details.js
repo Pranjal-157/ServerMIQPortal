@@ -31,6 +31,7 @@ router.post("/", verifyToken, async (req, res) => {
       res.status(200).send({ data: addData });
     });
   } catch (error) {
+    console.log(error)
     res.status(500).send({ message: "Error data cannot be created" });
   }
 });

@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 
 const dataSchema = new Schema({
   title: { type: String, required: true, maxlength: 70, trim: true },
-  description: { type: String | null},
+  description: { type: String },
   technology: { type: String, required: true, maxlength: 15, trim: true },
   experience: { type: String, required: true, trim: true },
   code: { type: String, trim: true },
@@ -24,7 +24,7 @@ const validateData = (data) => {
     description: Joi.optional().label("Description"),
     technology: Joi.string().required().label("Technology"),
     experience: Joi.string().required().label("Experience Level"),
-    code: Joi.string().allow(null).label("Code No"),
+    code: Joi.optional().allow(null).label("Code No"),
     client: Joi.string().required().label("Client Name"),
     postedBy: Joi.string().required().label("Posted By")
   });

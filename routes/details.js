@@ -27,7 +27,7 @@ router.post("/", verifyToken, async (req, res) => {
     }
 
     let details = await new Data(req.body);
-    console.log(details.creationDate);
+    // console.log(details.creationDate);
     details.save((err, addData) => {
       res.status(200).send({ data: addData });
     });
@@ -37,9 +37,33 @@ router.post("/", verifyToken, async (req, res) => {
 });
 
 //Update the data
+router.put("/:id", verifyToken, async(req,res) => {
+  try{
+    
+    const id = req.params.id;
+    
+    let updatedData = await Data.findOneAndUpdate({_id: id}, {
+      title: req.body.title,
+      description: req.body.description,
+      technology: req.body.technology,
+      experience: req.body.experience,
+      code: req.body.code,
+      client: req.body.client,
+      postedBy: req.body.postedBy
+    })
+
+     if(!id) {
+      res.status(400).send({ message: "No id is found" })
+     }
+     res.status(200).send(updatedData)
+  }catch(error){
+      console.log(error)
+     res.status(400).send({ message: "Error data cannot be deleted" })
+  }
+})
 
 //Delete the data
-router.delete("/:id", verifyToken, async (req, res) => {
+router.delete("/:id",  async (req, res) => {
   try {
     const id = req.params.id;
     const deleteData = await Data.findByIdAndDelete(id);
@@ -47,7 +71,8 @@ router.delete("/:id", verifyToken, async (req, res) => {
       res.status(400).send({ message: "No id is found" });
     }
     res.status(200).send(deleteData);
-  } catch (err) {
+  } catch (error) {
+    // console.log(err)
     res.status(500).send({ message: "Error data cannot be deleted" });
   }
 });

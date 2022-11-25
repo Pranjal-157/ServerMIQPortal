@@ -57,8 +57,8 @@ router.put("/:id", verifyToken, async(req,res) => {
      }
      res.status(200).send(updatedData)
   }catch(error){
-      console.log(error)
-     res.status(400).send({ message: "Error data cannot be deleted" })
+      // console.log(error)
+     res.status(400).send({ message: "Error data cannot be updated" })
   }
 })
 

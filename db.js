@@ -4,8 +4,8 @@ dotenv.config();
 
 module.exports = () => {
   const connectParams = {
-    useNewUrlParser: true,
     useUnifiedTopology: true,
+    useNewUrlParser: true,
   };
   try {
     mongoose.connect(process.env.DATABASE_URL, connectParams);

@@ -6,6 +6,7 @@ const { Data, validateData } = require("../models/data");
 const dotenv = require("dotenv");
 dotenv.config();
 
+
 //Get the data
 router.get("/", verifyToken, async (req, res) => {
   try {

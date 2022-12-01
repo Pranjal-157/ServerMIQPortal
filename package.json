@@ -25,6 +25,7 @@
     "joi": "^17.6.3",
     "joi-password-complexity": "^5.1.0",
     "jsonwebtoken": "^8.5.1",
+    "mailgun-js": "^0.22.0",
     "mongoose": "^6.6.5",
     "nodemailer": "^6.8.0"
   },

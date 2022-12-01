@@ -1,22 +1,34 @@
 const router = require("express").Router();
 const { User, validate } = require("../models/user");
-const { UserOTPVerification } = require('../models/userOTPVerification')
+const UserOTPVerification = require("../models/UserOTPVerification")
 const bcrypt = require("bcrypt");
-const nodemailer = require("nodemailer");
 const dotenv = require("dotenv");
 const { string } = require("joi");
 dotenv.config();
 
-//Nodemailer 
-// let transporter = nodemailer.createTransport({
-//   host: "smtp-mail.mirafra.com",
-//   auth: {
-//     user: process.env.AUTH_EMAIL,
-//     pass: process.env.AUTH_PASS,
-//   },
-// })
 
+// sending Email
+const sendEmail = async(otp) => {
+try{
+  const apiKey = process.env.APIKEY;
+  const domain = process.env.DOMAIN;
 
+const mailgun = require('mailgun-js')({ domain, apiKey });
+
+await mailgun.
+  messages().
+  send({
+    from: `test@${domain}`,
+    to: 'richardselvaraj07@gmail.com',
+    subject: 'Verification',
+    html: `<p>Enter <b>${otp}</b> in the app to verify your email address and complete the signup 
+    <p>This code will <b>expires in 1hour</b></p>`,
+  })
+}catch(error){
+  console.log(error)
+  ({message: 'Error Occurred in Mail Generator'})
+}
+}
 
 
 //register user
@@ -25,8 +37,8 @@ router.post("/", async (req, res) => {
     const { error } = validate(req.body);
 
     if (error)
-    return res.status(400).send({ message: error.details[0].message });
-    console.log(error);
+    return res.status(400).send({ message: error});
+    // console.log(error);
 
     let user = await User.findOne({ email: req.body.email });
 
@@ -42,12 +54,10 @@ router.post("/", async (req, res) => {
     user
       .save()
       .then((registerUser) => {
-        const token = registerUser.generateAuthToken();
-        const id = registerUser._id;
-        const email = registerUser.email; 
-        return res
+         const token = registerUser.generateAuthToken();
+         return res
           .status(200)
-          .send({data: token,  message: `Registeration Successful`})
+          .send({data1: token, message: 'Registered user successful'})
       })
       .catch((err) => {
         console.log(err);
@@ -61,19 +71,11 @@ router.post("/", async (req, res) => {
 });
 
 
-// // //Send otp verification email
+//Send otp verification email
 // const sendOtpVerificationEmail = async ({_id, email}, res) => {
 //   try{
 //      const otp = `${Math.floor(1000 + Math.random() * 9000)}`;
-//     console.log(otp)
-//      //mail options
-//      const mailOptions = {
-//         from: process.env.AUTH_EMAIL,
-//         to: email,
-//         subject: "Verify Your Email",
-//         html: `<p>Enter <b>${otp}</b> in the app to verify your email address and complete the signup 
-//         <p>This code will <b>expires in 1hour</b></p>`,
-//      };
+//      console.log(otp)
 
 //    //hash the otp
 //    const salt = await bcrypt.genSalt(Number(process.env.SALT));
@@ -88,17 +90,10 @@ router.post("/", async (req, res) => {
 
 //    //Save in database
 //    await newOTPVerification.save();
-//    await transporter.sendMail(mailOptions);
-//    res.status(202).send({
-//     message: "Verification otp email sent",
-//     data: {
-//       userId: _id,
-//       email,
-//     }
-//    })
+//    await sendEmail(otp)
+  
 //   } catch(error){
-//     console.log(error);
-//     res.status(500).send({ message: "Internal server error" });
+//     ({ message: "Internal server error" });
 //   }
 // }
 
